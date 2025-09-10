@@ -1,4 +1,4 @@
-import { CORE_CONCEPTS } from "./data.js";
+import { CORE_CONCEPTS , EXAMPLES} from "./data.js";
 import CoreConcept from "./components/CoreConcept.jsx";
 import TabButton from "./components/TabButton.jsx";
 import {useState} from 'react'
@@ -10,12 +10,11 @@ import {useState} from 'react'
 
 function App() {
   
-  let [selectedTopic, setSelectedTopic] = useState("Wybierz mnie")
+  let [selectedTopic, setSelectedTopic] = useState("components")
   function handleSelect(selectedButton) {
     // console.log(selectedButton)
 
-    tabContent = selectedButton;
-    console.log(tabContent);
+    setSelectedTopic(selectedButton)
   }
   return (
     <div>
@@ -37,7 +36,15 @@ function App() {
             <TabButton onSelect={() =>handleSelect('props')} label="Props"></TabButton>
             <TabButton onSelect={() =>handleSelect('state')} label="State"></TabButton>
           </menu>
-          {tabContent}
+          <div id="tab-content">
+            <h3>{EXAMPLES[selectedTopic].title}</h3>
+            <p>{EXAMPLES[selectedTopic].description}</p>
+            <pre>
+              <code>
+                {EXAMPLES[selectedTopic].code}
+              </code>
+            </pre>
+          </div>
 
         </section>
           
